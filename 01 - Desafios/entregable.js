@@ -1,22 +1,23 @@
 class ProductManager {
   constructor() {
     this.products = [];
+    this.counter = 0;
   }
 
   addProduct(title, description, price, thumbnail, code, stock) {
     if (!title || !description || !price || !thumbnail || !code || !stock) {
       console.error("Todos los campos son obligatorios");
-      return;
+      return console.log() ;
     }
 
     const codeExists = this.products.some((product) => product.code === code);
     if (codeExists) {
       console.error("El código de producto ya existe");
-      return;
+      return console.log() ;
     }
 
     const product = {
-      id: this.#getMaxId() + 1,
+      id: ++this.counter,
       title,
       description,
       price,
@@ -41,11 +42,9 @@ class ProductManager {
 
   getProductById(id) {
     const product = this.products.find((product) => product.id === id);
-    if (product) {
-      return product;
-    } else {
-      return console.log("Not found");
-    }
+    if(!product) 
+    return console.log("Not found")
+    return product
   }
 }
 
