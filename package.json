@@ -2,11 +2,11 @@
   "name": "03desafio",
   "version": "1.0.0",
   "description": "tercer desafio backend",
-  "main": "app.js",
+  "main": "./src/server.js",
   "type": "module",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "node .",
+    "dev": "nodemon ."
   },
   "author": "Hernan Villalba",
   "license": "ISC",
