@@ -1,0 +1,22 @@
+{
+  "name": "proyectobakcend",
+  "version": "1.0.0",
+  "description": "proyecto curso backend",
+  "main": "./src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "nodemon ."
+  },
+  "keywords": [],
+  "author": "Hernan Villalba",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "node": "^22.1.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
