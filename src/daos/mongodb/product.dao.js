@@ -1,9 +1,12 @@
 import { ProductModel } from "./models/productModels.js";
 
 export default class ProductDaoMongoDB {
-  async getAll() {
+  async getAll(page = 1, limit = 10, name, sort ) {
     try {
-      const response = await ProductModel.find({});
+      const filter = name ? {'name':name} : {};
+      let sortOrder = {};
+      if(sort) sortOrder.price = sort === 'asc' ? 1 : sort === 'desc' ?-1 : null; 
+      const response = await ProductModel.paginate(filter,{page, limit, sort:sortOrder});
       return response;
     } catch (error) {
       throw new Error(error);
