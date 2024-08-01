@@ -37,6 +37,11 @@ const usersSchema = new Schema({
     required: true,
     default: false,
   },
+  cart: {
+    type: Schema.Types.ObjectId,
+    ref: "carts",
+    default: []
+  }
 });
 const userColl = "users";
 export const UserModel = model(userColl, usersSchema);

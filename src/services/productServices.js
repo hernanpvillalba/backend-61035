@@ -1,10 +1,10 @@
 import Services from "./classServices.js";
-import ProductDaoMongoDB from "../daos/mongodb/product.dao.js";
+import ProductDaoMongo from "../daos/mongodb/product.dao.js";
 
-const productDao = new ProductDaoMongoDB();
+const prodDao = new ProductDaoMongo();
 
 export default class ProductService extends Services {
-  constructor() {
-    super(productDao);
-  }
-}
+    constructor(){
+        super(prodDao);
+    }
+};

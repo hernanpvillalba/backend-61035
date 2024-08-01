@@ -9,13 +9,15 @@ export default class CartServices extends Services {
     super(cartDao);
   }
 
-  addProductToCart = async (cartId, prodId) => {
+  addProdToCart = async (cartId, prodId) => {
     try {
-      const existCart = await getById(cartId);
+      const existCart = await this.getById(cartId);
       if (!existCart) return null;
+  
       const existProd = await prodDao.getById(prodId);
       if (!existProd) return null;
-      return await this.dao.addProductToCart(cartId, prodId);
+
+      return await this.dao.addProdToCart(cartId, prodId);
     } catch (error) {
       throw new Error(error);
     }
@@ -23,10 +25,10 @@ export default class CartServices extends Services {
 
   removeProdToCart = async (cartId, prodId) => {
     try {
-      const existCart = await getById(cartId);
-      if (!existCart) return null;
-      const existProd = await this.dao.existProd(cartId, prodId);
-      if (!existProd) return null;
+      const existCart = await this.getById(cartId);
+      if(!existCart) return null;
+      const existProdInCart = await this.dao.existProdInCart(cartId, prodId);
+      if (!existProdInCart) return null;
       return await this.dao.removeProdToCart(cartId, prodId);
     } catch (error) {
       throw new Error(error);
@@ -35,10 +37,12 @@ export default class CartServices extends Services {
 
   updateProdQuantityToCart = async (cartId, prodId, quantity) => {
     try {
-      const existCart = await getById(cartId);
-      if (!existCart) return null;
-      const existProd = await this.dao.existProd(cartId, prodId);
-      if (!existProd) return null;
+      const existCart = await this.getById(cartId);
+      if(!existCart) return null;
+  
+      const existProdInCart = await this.dao.existProdInCart(cartId, prodId);
+      if (!existProdInCart) return null;
+  
       return await this.dao.updateProdQuantityToCart(cartId, prodId, quantity);
     } catch (error) {
       throw new Error(error);
@@ -47,7 +51,8 @@ export default class CartServices extends Services {
 
   clearCart = async (cartId) => {
     try {
-      const existCart = await getById(cartId);
+      const existCart = await this.getById(cartId);
+      console.log("existCart-->", existCart);
       if (!existCart) return null;
       return await this.dao.clearCart(cartId);
     } catch (error) {

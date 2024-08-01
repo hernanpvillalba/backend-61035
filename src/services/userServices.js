@@ -3,8 +3,12 @@ import UserDaoMongo from "../daos/mongodb/user.dao.js";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 import { createHash, isValidPassword } from "../utils.js";
+import CartDaoMongo from "../daos/mongodb/cart.dao.js";
+import UserRepository from "../repository/user.repository.js";
+const userRepository = new UserRepository();
 
 const userDao = new UserDaoMongo();
+const cartDao = new CartDaoMongo();
 
 export default class UserService extends Services {
   constructor() {
@@ -23,6 +27,7 @@ export default class UserService extends Services {
       const { email, password } = user;
       const existUser = await this.dao.getByEmail(email);
       if (!existUser) {
+        const cartUser = await cartDao.create();
         if (
           email === process.env.EMAIL_ADMIN &&
           password === process.env.PASS_ADMIN
@@ -31,13 +36,14 @@ export default class UserService extends Services {
             ...user,
             password: createHash(password),
             role: "admin",
+            cart: cartUser._id,
           });
           return newUser;
         } else {
           const newUser = await this.dao.create({
             ...user,
             password: createHash(password),
-            role: "admin",
+            cart: cartUser._id,
           });
           return newUser;
         }
@@ -60,4 +66,12 @@ export default class UserService extends Services {
       throw new Error(error);
     }
   }
+
+  getUserById = async (id) => {
+    try {
+      return await userRepository.getUserById(id);
+    } catch (error) {
+      throw new Error(error);
+    }
+  };
 }

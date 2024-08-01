@@ -5,19 +5,19 @@ export default class Services {
 
   async getAll() {
     try {
-      return await this.dao.getAll({});
+      return await this.dao.getAll();
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  async getById(id) {
+  getById = async(id) => {
     try {
       return await this.dao.getById(id);
     } catch (error) {
       throw new Error(error);
     }
-  }
+  };
 
   async create(obj) {
     try {
@@ -25,7 +25,7 @@ export default class Services {
     } catch (error) {
       throw new Error(error);
     }
-  }
+  };
 
   async update(id, obj) {
     try {
@@ -33,7 +33,7 @@ export default class Services {
     } catch (error) {
       throw new Error(error);
     }
-  }
+  };
 
   async delete(id) {
     try {
@@ -41,5 +41,5 @@ export default class Services {
     } catch (error) {
       throw new Error(error);
     }
-  }
+  };
 }

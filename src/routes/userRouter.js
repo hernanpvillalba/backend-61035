@@ -1,13 +1,14 @@
 import { Router } from 'express';
 import { checkAuth } from '../middlewares/authJwt.js';
-import UserController from '../controllers/userController.js';
-
+import UserController from '../controllers/userControllers.js';
 const controller = new UserController();
 
 const router = Router();
 
 router.post('/register', controller.register);
+
 router.post('/login', controller.login);
+
 router.get('/profile', checkAuth, controller.profile);
 
 export default router;

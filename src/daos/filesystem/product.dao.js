@@ -3,6 +3,6 @@ const path = "./products.json";
 
 export default class ProductDaoFS extends FSDao {
   constructor() {
-    super(path);
+    super(path)
   }
 }
